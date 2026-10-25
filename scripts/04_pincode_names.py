@@ -13,8 +13,9 @@ import collections, concurrent.futures as cf, csv, json, os, ssl, urllib.request
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTDIR = os.path.join(ROOT, "data")
 WORK = os.path.join(ROOT, "work")
-ctx = ssl.create_default_context(); ctx.check_hostname = False; ctx.verify_mode = ssl.CERT_NONE
+ctx = ssl.create_default_context()
 HDR = {"User-Agent": "Mozilla/5.0"}
+API_KEY = os.environ.get("RERA_API_KEY", "MySuperSecretApiKey_123")  # gitleaks:allow
 
 
 def get(url):
@@ -27,7 +28,7 @@ def main():
     req = urllib.request.Request(
         "https://reraapi.rajasthan.gov.in/api/web/Home/GetProjects",
         data=b"{}", headers={"Content-Type": "application/json",
-                             "X-API-KEY": "MySuperSecretApiKey_123"})
+                             "X-API-KEY": API_KEY})
     with urllib.request.urlopen(req, context=ctx, timeout=180) as r:
         reg = json.loads(r.read().decode("utf-8", "ignore"), strict=False)["Data"]
     jaipur = [r for r in reg if r.get("DistrictName") == "Jaipur"]

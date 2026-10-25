@@ -31,11 +31,12 @@ import json, os, ssl, sys, urllib.request
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORK = os.path.join(ROOT, "work")
 API = "https://reraapi.rajasthan.gov.in/api/web/Home"
-API_KEY = "MySuperSecretApiKey_123"          # carried in the portal's own bundle
+# Static client-side key embedded in the portal's own JavaScript bundle. It is
+# not an account credential, so it is kept as a documented fallback to keep the
+# scraper working out of the box; override with RERA_API_KEY if it rotates.
+API_KEY = os.environ.get("RERA_API_KEY", "MySuperSecretApiKey_123")  # gitleaks:allow
 
 CTX = ssl.create_default_context()
-CTX.check_hostname = False
-CTX.verify_mode = ssl.CERT_NONE
 
 
 def post(path, body):

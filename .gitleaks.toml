@@ -1,0 +1,11 @@
+title = "gitleaks config"
+
+# Keep the default rule set and add only the documented exceptions below.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Rajasthan RERA public client-side API key (published in the portal bundle)"
+regexes = [
+  '''MySuperSecretApiKey_123''',
+]

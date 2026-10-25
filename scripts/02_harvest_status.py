@@ -7,7 +7,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORK = os.path.join(ROOT, "work")
 os.makedirs(WORK, exist_ok=True)
 
-ctx = ssl.create_default_context(); ctx.check_hostname=False; ctx.verify_mode=ssl.CERT_NONE
+ctx = ssl.create_default_context()
 HDR = {"User-Agent":"Mozilla/5.0", "Accept":"application/json"}
 OUT = os.path.join(WORK, "details.json")
 

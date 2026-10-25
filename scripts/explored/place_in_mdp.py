@@ -17,7 +17,7 @@ import io, json, os, re, zipfile
 from shapely.geometry import Point, shape
 from shapely.strtree import STRtree
 
-ROOT = "/home/mm/jaipur-mdp-viewer"
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 def kml_point(path):
